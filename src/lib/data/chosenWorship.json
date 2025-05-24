@@ -1,0 +1,115 @@
+{
+  "users": [
+    {
+      "id": "user_neo123",
+      "name": "Neo Vasquez",
+      "email": "neo@zion.church",
+      "instruments": [
+        "guitar",
+        "vocals"
+      ],
+      "defaultPreferredNote": "G",
+      "roles": [
+        "leader",
+        "worship",
+        "praise"
+      ],
+      "avatarUrl": "/avatars/neo.png"
+    },
+    {
+      "id": "user_trinity987",
+      "name": "Trinity Vasquez",
+      "email": "trinity@zion.church",
+      "instruments": [
+        "piano",
+        "vocals"
+      ],
+      "defaultPreferredNote": "C",
+      "roles": [
+        "worship"
+      ],
+      "avatarUrl": "/avatars/trinity.png"
+    }
+  ],
+  "songs": [
+    {
+      "id": "song_001",
+      "title": "Way Maker",
+      "originalNote": "A",
+      "tags": [
+        "worship",
+        "faith"
+      ],
+      "lyricsUrl": "https://www.letras.com/way-maker/",
+      "addedBy": "user_neo123",
+      "createdAt": "2025-05-24T18:59:37.896905"
+    },
+    {
+      "id": "song_002",
+      "title": "Raise a Hallelujah",
+      "originalNote": "G",
+      "tags": [
+        "praise",
+        "victory"
+      ],
+      "lyricsUrl": "https://www.lyrics.com/lyric/36548360",
+      "addedBy": "user_trinity987",
+      "createdAt": "2025-05-24T18:59:37.896930"
+    }
+  ],
+  "userSongPreferences": [
+    {
+      "userId": "user_neo123",
+      "songId": "song_001",
+      "preferredNote": "G"
+    },
+    {
+      "userId": "user_trinity987",
+      "songId": "song_002",
+      "preferredNote": "F"
+    }
+  ],
+  "setlists": [
+    {
+      "id": "setlist_0526",
+      "title": "Sunday May 26th",
+      "date": "2025-05-26",
+      "praise": [
+        "song_002"
+      ],
+      "worship": [
+        "song_001"
+      ],
+      "createdBy": "user_trinity987",
+      "assignedPraiseLeader": "user_neo123",
+      "assignedWorshipLeader": "user_trinity987",
+      "notes": "Trinity might be late, have backup ready."
+    }
+  ],
+  "calendarEvents": [
+    {
+      "id": "event_0526",
+      "title": "Sunday Morning Service",
+      "date": "2025-05-26",
+      "setlistId": "setlist_0526",
+      "time": "10:00",
+      "location": "Main Sanctuary"
+    }
+  ],
+  "roleAssignments": [
+    {
+      "eventId": "event_0526",
+      "userId": "user_morpheus456",
+      "role": "keyboard",
+      "section": "worship"
+    }
+  ],
+  "availability": [
+    {
+      "userId": "user_trinity987",
+      "unavailableFrom": "2025-05-24",
+      "unavailableTo": "2025-05-26",
+      "reason": "Traveling to Zion"
+    }
+  ]
+}
