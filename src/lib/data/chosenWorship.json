@@ -35,7 +35,7 @@
     {
       "id": "song_001",
       "title": "Way Maker",
-      "originalNote": "A",
+      "originalKey": "A",
       "tags": [
         "worship",
         "faith"
@@ -47,7 +47,7 @@
     {
       "id": "song_002",
       "title": "Raise a Hallelujah",
-      "originalNote": "G",
+      "originalKey": "G",
       "tags": [
         "praise",
         "victory"
@@ -74,16 +74,26 @@
       "id": "setlist_0526",
       "title": "Sunday May 26th",
       "date": "2025-05-26",
-      "praise": [
-        "song_002"
+      "songs": [
+        {
+          "songId": "song_002",
+          "section": "praise",
+          "order": 1,
+          "preferredKey": "G",
+          "notes": "Opening praise song"
+        },
+        {
+          "songId": "song_001",
+          "section": "worship",
+          "order": 2,
+          "preferredKey": "A",
+          "notes": "Main worship song"
+        }
       ],
-      "worship": [
-        "song_001"
-      ],
+      "praiseLeader": "user_neo123",
+      "worshipLeader": "user_trinity987",
       "createdBy": "user_trinity987",
-      "assignedPraiseLeader": "user_neo123",
-      "assignedWorshipLeader": "user_trinity987",
-      "notes": "Trinity might be late, have backup ready."
+      "notes": ["Trinity might be late, have backup ready."]
     }
   ],
   "calendarEvents": [
@@ -110,6 +120,84 @@
       "unavailableFrom": "2025-05-24",
       "unavailableTo": "2025-05-26",
       "reason": "Traveling to Zion"
+    }
+  ],
+  "recurringServices": [
+    {
+      "id": "service_sunday_morning",
+      "title": "Sunday Morning Worship",
+      "dayOfWeek": 0,
+      "time": "10:30",
+      "location": "Main Sanctuary",
+      "type": "sunday-worship",
+      "setlistReminderDays": 5,
+      "teamReminderDays": 3,
+      "active": true,
+      "defaultDuration": 45,
+      "requiredRoles": ["worship", "praise", "musical-director"]
+    },
+    {
+      "id": "service_thursday_discipleship",
+      "title": "Thursday Night Discipleship",
+      "dayOfWeek": 4,
+      "time": "19:30",
+      "location": "Fellowship Hall",
+      "type": "discipleship",
+      "setlistReminderDays": 3,
+      "teamReminderDays": 2,
+      "active": true,
+      "defaultDuration": 30,
+      "requiredRoles": ["worship"]
+    }
+  ],
+  "notifications": [
+    {
+      "id": "notif_001",
+      "type": "setlist-reminder",
+      "serviceId": "service_sunday_morning",
+      "targetDate": "2025-09-29",
+      "createdAt": "2025-09-24T10:30:00.000000",
+      "status": "pending",
+      "assignedTo": "user_neo123",
+      "message": "Reminder: Create setlist for Sunday Morning Worship (Sept 29)"
+    },
+    {
+      "id": "notif_002",
+      "type": "setlist-reminder",
+      "serviceId": "service_thursday_discipleship",
+      "targetDate": "2025-09-26",
+      "createdAt": "2025-09-23T19:30:00.000000",
+      "status": "pending",
+      "assignedTo": "user_trinity987",
+      "message": "Reminder: Create setlist for Thursday Night Discipleship (Sept 26)"
+    }
+  ],
+  "setlistTemplates": [
+    {
+      "id": "template_sunday_full",
+      "name": "Sunday Full Service",
+      "serviceType": "sunday-worship",
+      "structure": {
+        "opening": { "count": 1, "type": "praise", "tempo": "fast" },
+        "praise": { "count": 2, "type": "praise", "tempo": "mixed" },
+        "transition": { "count": 1, "type": "worship", "tempo": "medium" },
+        "worship": { "count": 2, "type": "worship", "tempo": "slow" },
+        "closing": { "count": 1, "type": "worship", "tempo": "medium" }
+      },
+      "totalSongs": 7,
+      "estimatedDuration": 45
+    },
+    {
+      "id": "template_thursday_simple",
+      "name": "Thursday Discipleship",
+      "serviceType": "discipleship",
+      "structure": {
+        "opening": { "count": 1, "type": "praise", "tempo": "medium" },
+        "worship": { "count": 2, "type": "worship", "tempo": "slow" },
+        "closing": { "count": 1, "type": "worship", "tempo": "medium" }
+      },
+      "totalSongs": 4,
+      "estimatedDuration": 30
     }
   ]
 }

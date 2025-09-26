@@ -1,3 +1,82 @@
 @import 'tailwindcss';
 
+/* Material Design 3 Color Palette */
+:root {
+  --md-primary: 103 80 164;
+  --md-on-primary: 255 255 255;
+  --md-primary-container: 234 221 255;
+  --md-on-primary-container: 33 0 93;
+  --md-secondary: 98 91 113;
+  --md-on-secondary: 255 255 255;
+  --md-secondary-container: 232 222 248;
+  --md-on-secondary-container: 30 25 43;
+  --md-surface: 254 247 255;
+  --md-on-surface: 28 27 31;
+  --md-surface-variant: 231 224 236;
+  --md-on-surface-variant: 73 69 78;
+  --md-outline: 121 116 126;
+  --md-shadow: 0 0 0;
+  --md-elevation-1: 0 1px 3px rgb(0 0 0 / 0.12), 0 1px 2px rgb(0 0 0 / 0.24);
+  --md-elevation-2: 0 3px 6px rgb(0 0 0 / 0.16), 0 3px 6px rgb(0 0 0 / 0.23);
+  --md-elevation-3: 0 10px 20px rgb(0 0 0 / 0.19), 0 6px 6px rgb(0 0 0 / 0.23);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --md-primary: 208 188 255;
+    --md-on-primary: 54 0 115;
+    --md-primary-container: 78 39 138;
+    --md-on-primary-container: 234 221 255;
+    --md-secondary: 204 194 220;
+    --md-on-secondary: 51 45 65;
+    --md-secondary-container: 74 68 88;
+    --md-on-secondary-container: 232 222 248;
+    --md-surface: 16 14 19;
+    --md-on-surface: 230 225 229;
+    --md-surface-variant: 73 69 78;
+    --md-on-surface-variant: 202 196 208;
+    --md-outline: 147 143 153;
+  }
+}
+
+/* Material Design Typography */
+body {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: rgb(var(--md-surface));
+  color: rgb(var(--md-on-surface));
+}
+
+/* Material Design Utilities */
+.md-surface {
+  background-color: rgb(var(--md-surface));
+  color: rgb(var(--md-on-surface));
+}
+
+.md-primary {
+  background-color: rgb(var(--md-primary));
+  color: rgb(var(--md-on-primary));
+}
+
+.md-primary-container {
+  background-color: rgb(var(--md-primary-container));
+  color: rgb(var(--md-on-primary-container));
+}
+
+.md-secondary-container {
+  background-color: rgb(var(--md-secondary-container));
+  color: rgb(var(--md-on-secondary-container));
+}
+
+.md-elevation-1 {
+  box-shadow: var(--md-elevation-1);
+}
+
+.md-elevation-2 {
+  box-shadow: var(--md-elevation-2);
+}
+
+.md-elevation-3 {
+  box-shadow: var(--md-elevation-3);
+}
+
 
