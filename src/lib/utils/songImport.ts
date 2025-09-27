@@ -41,7 +41,7 @@ export function processBulkImport(songs: BulkSongInput[], existingSongs: SongDat
     // Transform and validate
     const songData: SongData = {
       title: songInput.title.trim(),
-      originalNote: songInput.originalKey,
+      originalKey: songInput.originalKey,
       tags: songInput.tags || [],
       lyricsUrl: songInput.lyricsUrl,
       artist: songInput.artist,

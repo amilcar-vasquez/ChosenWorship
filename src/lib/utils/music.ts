@@ -162,7 +162,7 @@ export async function searchLyrics(songTitle: string, artist?: string): Promise<
  */
 export interface SongData {
   title: string;
-  originalNote: string;
+  originalKey: string;
   tags: string[];
   lyricsUrl?: string;
   artist?: string;
@@ -176,7 +176,7 @@ export function validateSongData(data: Partial<SongData>): { isValid: boolean; e
     errors.push('Song title is required');
   }
   
-  if (!data.originalNote || !CHROMATIC_SCALE.some(key => key.startsWith(data.originalNote!))) {
+  if (!data.originalKey || !CHROMATIC_SCALE.some(key => key.startsWith(data.originalKey!))) {
     errors.push('Valid original key is required');
   }
   

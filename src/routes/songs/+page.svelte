@@ -46,7 +46,7 @@
       const matchesSearch = song.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           song.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesTags = selectedTags.length === 0 || selectedTags.every(tag => song.tags.includes(tag));
-      const matchesKey = !selectedKey || song.originalNote === selectedKey;
+      const matchesKey = !selectedKey || song.originalKey === selectedKey;
       return matchesSearch && matchesTags && matchesKey;
     })
     .sort((a, b) => {
@@ -54,7 +54,7 @@
         case 'date':
           return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
         case 'key':
-          return CHROMATIC_SCALE.indexOf(a.originalNote) - CHROMATIC_SCALE.indexOf(b.originalNote);
+          return CHROMATIC_SCALE.indexOf(a.originalKey) - CHROMATIC_SCALE.indexOf(b.originalKey);
         default:
           return a.title.localeCompare(b.title);
       }
@@ -406,7 +406,7 @@
       <!-- Template and Instructions -->
       <div>
         <div class="flex justify-between items-center mb-2">
-          <label class="block text-sm font-medium text-gray-700">Song Template</label>
+          <h3 class="block text-sm font-medium text-gray-700">Song Template</h3>
           <button 
             class="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm hover:bg-blue-200 transition-colors"
             on:click={copyTemplate}
@@ -544,7 +544,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {#each filteredSongs as song}
       {@const userPreferredKey = getUserPreferredKey(song.id)}
-      {@const transposition = calculateTransposition(song.originalNote, userPreferredKey)}
+      {@const transposition = calculateTransposition(song.originalKey, userPreferredKey)}
       
       <div class="md-surface rounded-lg p-4 md-elevation-1 hover:md-elevation-2 transition-shadow border border-gray-200">
         <!-- Song Header -->
@@ -569,7 +569,7 @@
           <div class="flex items-center justify-between text-sm">
             <div>
               <span class="text-gray-600">Original:</span>
-              <span class="font-semibold text-gray-900 ml-1">{song.originalNote}</span>
+              <span class="font-semibold text-gray-900 ml-1">{song.originalKey}</span>
             </div>
             
             {#if currentUser}
@@ -690,7 +690,7 @@
       <p class="text-sm text-gray-600">Unique Tags</p>
     </div>
     <div>
-      <p class="text-2xl font-bold text-purple-600">{new Set(data.songs.map(s => s.originalNote)).size}</p>
+      <p class="text-2xl font-bold text-purple-600">{new Set(data.songs.map(s => s.originalKey)).size}</p>
       <p class="text-sm text-gray-600">Different Keys</p>
     </div>
     <div>

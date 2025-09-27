@@ -142,9 +142,11 @@
 </script>
 
 <div class="container mx-auto p-4 max-w-6xl">
-  <header class="mb-6">
-    <h1 class="text-2xl font-bold text-surface-on mb-2">Setlists & Scheduling</h1>
-    <p class="text-surface-on-variant">Manage worship setlists and automatic service scheduling</p>
+  <header class="mb-8 text-center">
+    <h1 class="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-3 flex items-center justify-center gap-3">
+      🎵 Setlists & Scheduling
+    </h1>
+    <p class="text-gray-600 dark:text-gray-300 text-lg">Manage worship setlists and automatic service scheduling</p>
   </header>
 
   <!-- Active Notifications -->
@@ -180,55 +182,62 @@
   {/if}
 
   <!-- Filters and Controls -->
-  <section class="mb-6 flex flex-wrap gap-4 items-center justify-between">
-    <div class="flex gap-2">
-      <select 
-        bind:value={filterStatus}
-        class="px-3 py-2 surface-container rounded-lg text-surface-on text-sm"
-      >
-        <option value="all">All Services</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="needs-setlist">Needs Setlist</option>
-        <option value="past">Past Services</option>
-      </select>
+  <section class="mb-8 bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-800 dark:to-blue-900/20 p-6 rounded-2xl shadow-lg">
+    <div class="flex flex-wrap gap-6 items-center justify-between">
+      <div class="flex gap-4">
+        <select 
+          bind:value={filterStatus}
+          class="px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-gray-800 dark:text-gray-200 font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+        >
+          <option value="all">📊 All Services</option>
+          <option value="upcoming">⏰ Upcoming</option>
+          <option value="needs-setlist">⚠️ Needs Setlist</option>
+          <option value="past">📋 Past Services</option>
+        </select>
+        
+        <select 
+          bind:value={sortBy}
+          class="px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-gray-800 dark:text-gray-200 font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+        >
+          <option value="date">📅 Sort by Date</option>
+          <option value="service">⛪ Sort by Service</option>
+          <option value="status">📈 Sort by Status</option>
+        </select>
+      </div>
       
-      <select 
-        bind:value={sortBy}
-        class="px-3 py-2 surface-container rounded-lg text-surface-on text-sm"
+      <button 
+        class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-xl font-bold shadow-lg hover:shadow-xl transition-all hover:scale-105 flex items-center gap-3"
+        onclick={() => showCreateModal = true}
       >
-        <option value="date">Sort by Date</option>
-        <option value="service">Sort by Service</option>
-        <option value="status">Sort by Status</option>
-      </select>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+        </svg>
+        ✨ Create Setlist
+      </button>
     </div>
-    
-    <button 
-      class="px-4 py-2 primary-container text-primary-container-on rounded-lg hover:shadow-lg transition-shadow flex items-center gap-2"
-      onclick={() => showCreateModal = true}
-    >
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-      </svg>
-      Create Setlist
-    </button>
   </section>
 
   <!-- Recurring Services Schedule -->
   <section class="mb-6">
-    <h2 class="text-lg font-semibold text-surface-on mb-3">Recurring Services</h2>
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center gap-3">
+      ⚙️ Recurring Services
+    </h2>
     
-    <div class="grid gap-4 md:grid-cols-2">
+    <div class="grid gap-6 md:grid-cols-2">
       {#each data.recurringServices as service}
-        <div class="surface-container rounded-lg p-4">
-          <div class="flex justify-between items-start mb-3">
+        <div class="bg-gradient-to-br from-indigo-50 to-purple-100 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 shadow-lg border border-indigo-200 dark:border-indigo-700 hover:shadow-xl transition-all duration-300 animate-slideUp">
+          <div class="flex justify-between items-start mb-4">
             <div>
-              <h3 class="font-medium text-surface-on">{service.title}</h3>
-              <p class="text-sm text-surface-on-variant">
-                Every {getDayName(service.dayOfWeek)} at {formatServiceTime(service.time)}
+              <h3 class="font-bold text-lg text-gray-800 dark:text-gray-100 flex items-center gap-2">
+                <span class="text-2xl">{service.type === 'sunday-worship' ? '⛪' : '📖'}</span>
+                {service.title}
+              </h3>
+              <p class="text-sm text-indigo-600 dark:text-indigo-400 font-medium mt-1">
+                📅 Every {getDayName(service.dayOfWeek)} at {formatServiceTime(service.time)}
               </p>
             </div>
-            <span class="px-2 py-1 text-xs rounded {service.active ? 'secondary-container text-secondary-container-on' : 'surface-container-high text-surface-on-variant'}">
-              {service.active ? 'Active' : 'Inactive'}
+            <span class="px-3 py-2 text-sm rounded-full font-semibold shadow-md {service.active ? 'bg-green-500 text-white' : 'bg-gray-400 text-white'}">
+              {service.active ? '✅ Active' : '⏸️ Inactive'}
             </span>
           </div>
           
@@ -257,7 +266,9 @@
 
   <!-- Upcoming Services & Setlists -->
   <section>
-    <h2 class="text-lg font-semibold text-surface-on mb-3">Upcoming Services</h2>
+    <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center gap-3">
+      📅 Upcoming Services
+    </h2>
     
     <div class="grid gap-4">
       {#each getFilteredServices() as serviceInstance}
@@ -358,11 +369,15 @@
     <section class="mt-8">
       <h2 class="text-lg font-semibold text-surface-on mb-3">All Setlists</h2>
       
-      <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {#each data.setlists as setlist}
-          <article class="surface-container rounded-lg p-4 shadow-sm">
-            <h3 class="text-lg font-semibold text-surface-on mb-2">{setlist.title}</h3>
-            <p class="text-sm text-surface-on-variant mb-3">{formatDate(setlist.date)}</p>
+          <article class="bg-gradient-to-br from-emerald-50 to-teal-100 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl p-6 shadow-lg border border-emerald-200 dark:border-emerald-700 hover:shadow-xl transition-all duration-300 animate-slideUp">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 flex items-center gap-2">
+              🎵 {setlist.title}
+            </h3>
+            <p class="text-sm text-emerald-600 dark:text-emerald-400 mb-4 font-medium flex items-center gap-1">
+              📅 {formatDate(setlist.date)}
+            </p>
             
             <!-- Leaders -->
             <div class="mb-3">
@@ -407,64 +422,76 @@
 
 <!-- Create Setlist Modal -->
 {#if showCreateModal}
-  <div class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-    <div class="surface rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-      <div class="p-6">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold text-surface-on">
-            {selectedService ? `Create Setlist: ${selectedService.title}` : 'Create Setlist'}
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fadeIn">
+    <div class="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200 dark:border-gray-700">
+      <div class="p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 flex items-center gap-3">
+            🎵 {selectedService ? `Create Setlist: ${selectedService.title}` : 'Create Setlist'}
           </h2>
           <button 
-            class="p-2 hover:surface-container rounded-full transition-colors"
+            class="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-all duration-200 hover:scale-110"
             onclick={() => showCreateModal = false}
             aria-label="Close modal"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
             </svg>
           </button>
         </div>
         
         {#if selectedService}
-          <div class="mb-6 p-4 surface-container-low rounded-lg">
-            <div class="grid md:grid-cols-2 gap-4 text-sm">
-              <div>
-                <span class="text-surface-on-variant">Service:</span>
-                <div class="text-surface-on font-medium">{selectedService.title}</div>
-              </div>
-              <div>
-                <span class="text-surface-on-variant">Date & Time:</span>
-                <div class="text-surface-on font-medium">
-                  {selectedDate ? formatDate(selectedDate) : 'Not selected'} at {formatServiceTime(selectedService.time)}
+          <div class="mb-8 p-6 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl border border-blue-200 dark:border-blue-700">
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">⛪</span>
+                <div>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold">Service:</span>
+                  <div class="text-gray-800 dark:text-gray-200 font-bold text-lg">{selectedService.title}</div>
                 </div>
               </div>
-              <div>
-                <span class="text-surface-on-variant">Location:</span>
-                <div class="text-surface-on font-medium">{selectedService.location}</div>
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">📅</span>
+                <div>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold">Date & Time:</span>
+                  <div class="text-gray-800 dark:text-gray-200 font-bold">
+                    {selectedDate ? formatDate(selectedDate) : 'Not selected'} at {formatServiceTime(selectedService.time)}
+                  </div>
+                </div>
               </div>
-              <div>
-                <span class="text-surface-on-variant">Duration:</span>
-                <div class="text-surface-on font-medium">{selectedService.defaultDuration} minutes</div>
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">📍</span>
+                <div>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold">Location:</span>
+                  <div class="text-gray-800 dark:text-gray-200 font-bold">{selectedService.location}</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="text-2xl">⏱️</span>
+                <div>
+                  <span class="text-blue-600 dark:text-blue-400 font-semibold">Duration:</span>
+                  <div class="text-gray-800 dark:text-gray-200 font-bold">{selectedService.defaultDuration} minutes</div>
+                </div>
               </div>
             </div>
           </div>
         {/if}
         
         <!-- Template Selection -->
-        <div class="mb-6">
-          <label for="template-select" class="block text-sm font-medium text-surface-on mb-2">
-            Choose Template
+        <div class="mb-8">
+          <label for="template-select" class="block text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+            🎼 Choose Template
           </label>
           <select 
             id="template-select"
             bind:value={selectedTemplate}
-            class="w-full px-3 py-2 surface-container rounded-lg text-surface-on"
+            class="w-full px-4 py-3 bg-white dark:bg-gray-700 border-2 border-gray-300 dark:border-gray-600 rounded-xl text-gray-800 dark:text-gray-200 font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
           >
-            <option value="">No Template (Start Fresh)</option>
+            <option value="">✨ No Template (Start Fresh)</option>
             {#each data.setlistTemplates as template}
               {#if !selectedService || template.serviceType === selectedService.type}
                 <option value={template.id}>
-                  {template.name} ({template.totalSongs} songs, ~{template.estimatedDuration}min)
+                  🎵 {template.name} ({template.totalSongs} songs, ~{template.estimatedDuration}min)
                 </option>
               {/if}
             {/each}
@@ -473,13 +500,18 @@
         
         {#if selectedTemplate}
           {@const template = templates[selectedTemplate]}
-          <div class="mb-6 p-4 surface-container-low rounded-lg">
-            <h3 class="text-sm font-medium text-surface-on mb-3">Template Structure</h3>
-            <div class="grid gap-2">
+          <div class="mb-8 p-6 bg-gradient-to-br from-purple-50 to-pink-100 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl border border-purple-200 dark:border-purple-700">
+            <h3 class="text-lg font-bold text-purple-800 dark:text-purple-300 mb-4 flex items-center gap-2">
+              📋 Template Structure
+            </h3>
+            <div class="grid gap-3">
               {#each Object.entries(template.structure) as [sectionName, section]}
-                <div class="flex justify-between items-center text-sm">
-                  <span class="text-surface-on capitalize">{sectionName.replace('_', ' ')}</span>
-                  <span class="text-surface-on-variant">
+                <div class="flex justify-between items-center bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm border border-purple-100 dark:border-purple-800">
+                  <span class="text-gray-800 dark:text-gray-200 font-semibold capitalize flex items-center gap-2">
+                    {sectionName === 'praise' ? '🎉' : sectionName === 'worship' ? '🙏' : sectionName === 'opening' ? '🚪' : sectionName === 'closing' ? '✨' : '🎵'}
+                    {sectionName.replace('_', ' ')}
+                  </span>
+                  <span class="text-purple-600 dark:text-purple-400 font-medium bg-purple-100 dark:bg-purple-800 px-3 py-1 rounded-full">
                     {section.count} {section.type} song{section.count !== 1 ? 's' : ''} ({section.tempo})
                   </span>
                 </div>
@@ -488,25 +520,70 @@
           </div>
         {/if}
         
-        <div class="flex justify-end gap-3">
+        <div class="flex justify-end gap-4 pt-6 border-t border-gray-200 dark:border-gray-700">
           <button 
-            class="px-4 py-2 surface-container text-surface-on rounded-lg hover:surface-container-high transition-colors"
+            class="px-6 py-3 bg-gray-500 hover:bg-gray-600 text-white rounded-xl font-semibold transition-all hover:scale-105 shadow-lg"
             onclick={() => showCreateModal = false}
           >
-            Cancel
+            ❌ Cancel
           </button>
           <button 
-            class="px-4 py-2 primary text-primary-on rounded-lg hover:shadow-lg transition-shadow"
+            class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-xl font-bold transition-all hover:scale-105 shadow-lg hover:shadow-xl flex items-center gap-2"
             onclick={() => {
               // TODO: Implement setlist creation logic
               console.log('Create setlist:', { selectedService, selectedDate, selectedTemplate });
               showCreateModal = false;
             }}
           >
-            Create Setlist
+            ✨ Create Setlist
           </button>
         </div>
       </div>
     </div>
   </div>
 {/if}
+
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slideUp {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+</style>
